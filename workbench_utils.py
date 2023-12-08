@@ -28,6 +28,9 @@ import shutil
 import itertools
 import http.client
 import sqlite3
+import urllib3
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 
 from rich.traceback import install
 install()
@@ -3457,6 +3460,10 @@ def create_media(config, filename, file_fieldname, node_id, csv_row, media_use_t
                 "field_media_use": [{
                     "target_id": media_use_tids[0],
                     "target_type": 'taxonomy_term'
+                }],
+                "field_access_terms": [{
+                    "target_id": csv_row['field_access_terms'],
+                    "target_type": 'taxonomy_term'
                 }]
             }
         # Create a media from a local or remote file.
@@ -3479,6 +3486,10 @@ def create_media(config, filename, file_fieldname, node_id, csv_row, media_use_t
                 }],
                 "field_media_use": [{
                     "target_id": media_use_tids[0],
+                    "target_type": 'taxonomy_term'
+                }],
+                "field_access_terms": [{
+                    "target_id": csv_row['field_access_terms'],
                     "target_type": 'taxonomy_term'
                 }]
             }
